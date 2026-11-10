@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101619">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a2424'/%3E%3Cpath d='M32 9 54 32 32 55 10 32Z' fill='none' stroke='%23e4b85e' stroke-width='4'/%3E%3Cpath d='M32 21 43 32 32 43 21 32Z' fill='%23e4b85e'/%3E%3C/svg%3E">
+  <title>Capsule Coliseum — Chess</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Capsule Coliseum home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span><b>CAPSULE</b><small>MONSTER COLISEUM</small></span>
+      </a>
+      <div class="top-actions">
+        <span class="edition"><span class="live-dot"></span> DUEL ARENA <span class="edition-divider">/</span> CHESS</span>
+        <button class="icon-btn" id="soundBtn" aria-label="Toggle sound" title="Sound on">♫</button>
+      </div>
+    </header>
+
+    <section class="intro">
+      <div class="eyebrow"><span class="eyebrow-line"></span> STRATEGY • HONOR • VICTORY</div>
+      <h1>THE <em>COLISEUM</em></h1>
+      <p>Command your monsters. Outsmart your rival. The arena awaits.</p>
+    </section>
+
+    <section class="arena-layout" aria-label="Chess game">
+      <aside class="player-card opponent-card" id="opponentCard">
+        <div class="avatar avatar-opponent"><span>♚</span><i class="avatar-glow"></i></div>
+        <div class="player-info"><div class="player-label">RIVAL DUELIST</div><div class="player-name">Kaiba’s Heir <span class="crown">✦</span></div><div class="player-meta"><span class="status-pip"></span><span id="opponentStatus">WAITING IN THE ARENA</span></div></div>
+        <div class="rank-badge"><span>RANK</span><b>VII</b></div>
+      </aside>
+
+      <div class="board-column">
+        <div class="turn-banner" id="turnBanner" aria-live="polite">
+          <span class="turn-icon" id="turnIcon">♔</span>
+          <span class="turn-copy"><b id="turnTitle">YOUR MOVE</b><small id="turnHint">Choose a capsule to command</small></span>
+          <span class="turn-mark"></span>
+        </div>
+        <div class="board-frame">
+          <div class="board-rim rim-top"><span>✦</span><span>THE ROYAL GRID</span><span>✦</span></div>
+          <div class="board-wrap">
+            <div class="board" id="board" role="grid" aria-label="Chessboard"></div>
+            <div class="thinking" id="thinking"><span></span><span></span><span></span><b>RIVAL THINKING</b></div>
+          </div>
+          <div class="board-rim rim-bottom"><span>◈</span><span>EST. DUEL 001</span><span>◈</span></div>
+        </div>
+        <div class="board-controls">
+          <button class="text-btn" id="undoBtn" disabled><span>↶</span> UNDO MOVE</button>
+          <span class="control-separator"></span>
+          <button class="text-btn" id="restartBtn"><span>⟳</span> NEW DUEL</button>
+          <span class="control-spacer"></span>
+          <span class="keyboard-hint">TAP A MONSTER TO MOVE</span>
+        </div>
+      </div>
+
+      <aside class="player-card your-card" id="yourCard">
+        <div class="avatar avatar-you"><span>♔</span><i class="avatar-glow"></i></div>
+        <div class="player-info"><div class="player-label">YOU • DUELIST</div><div class="player-name">Arena Challenger <span class="crown">✦</span></div><div class="player-meta"><span class="status-pip"></span><span id="yourStatus">READY TO DUEL</span></div></div>
+        <div class="rank-badge"><span>RANK</span><b>I</b></div>
+      </aside>
+
+      <section class="side-panel">
+        <div class="panel-block captured-block">
+          <div class="panel-heading"><span>CAPSULES CLAIMED</span><span class="heading-gem">◆</span></div>
+          <div class="capture-group"><span class="capture-label">YOUR TROPHIES</span><div class="captured-pieces" id="yourCaptures"><span class="empty-captures">No captures yet</span></div></div>
+          <div class="capture-divider"></div>
+          <div class="capture-group"><span class="capture-label">RIVAL TROPHIES</span><div class="captured-pieces" id="rivalCaptures"><span class="empty-captures">No captures yet</span></div></div>
+        </div>
+        <div class="panel-block log-block">
+          <div class="panel-heading"><span>DUEL LOG</span><span class="log-count" id="moveCount">00</span></div>
+          <div class="move-log" id="moveLog" aria-live="polite"><div class="log-empty"><span>♜</span><b>THE DUEL HAS NOT BEGUN</b><small>Your first move will be recorded here</small></div></div>
+        </div>
+        <div class="tip-card"><span class="tip-icon">✧</span><p><b>DUELIST'S NOTE</b><br>Protect your king. A trapped king means the duel is over.</p></div>
+      </section>
+    </section>
+    <footer><span>CAPSULE MONSTER COLISEUM</span><span>PLAY WITH HONOR <b>✦</b></span></footer>
+  </main>
+  <div class="promotion-modal" id="promotionModal" hidden>
+    <div class="promotion-card"><div class="eyebrow">A MONSTER EVOLVES</div><h2>Choose your champion</h2><p>Your pawn has reached the far side of the arena.</p><div class="promotion-choices" id="promotionChoices"></div></div>
+  </div>
+  <div class="result-modal" id="resultModal" hidden>
+    <div class="result-card"><div class="result-emblem" id="resultEmblem">♔</div><div class="eyebrow">DUEL COMPLETE</div><h2 id="resultTitle">VICTORY</h2><p id="resultMessage">The arena is yours.</p><button class="primary-btn" id="playAgainBtn">FIGHT AGAIN <span>→</span></button></div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
